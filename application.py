@@ -5,4 +5,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "<H1>Accuracy of KNN is </H1>"
+    x = knnmodel()
+    y="<h1>Accuracy of the model is</h1>"+x
+    return y
