@@ -1,3 +1,4 @@
+--upgrade pip
 click==6.7
 Flask==1.0.2
 itsdangerous==0.24
@@ -6,4 +7,4 @@ MarkupSafe==1.0
 Werkzeug==0.14.1
 numpy==1.16.2
 pandas==0.23.4
-sklearn==0.0
+sklearn
