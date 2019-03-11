@@ -29,15 +29,15 @@ def knnmodel():
     knn_recall_score=recall_score(test_labels,knn_predicted_test_labels)
     knn_f1_score=f1_score(test_labels,knn_predicted_test_labels)
     return knn_accuracy_score
-def knnmodtrain():
-    with open("knn.pkl", "rb") as f:
-        knn = pickle.load(f)
-    data = pd.read_csv("test.csv")
-    X = data.drop("fraud", axis = 1)
-    y = data["fraud"]
-    y_knn = knn.predict(X)
-    y_num = y.values
-    return accuracy_score(y_num,y_knn)
+# def knnmodtrain():
+#     with open("knn.pkl", "rb") as f:
+#         knn = pickle.load(f)
+#     data = pd.read_csv("test.csv")
+#     X = data.drop("fraud", axis = 1)
+#     y = data["fraud"]
+#     y_knn = knn.predict(X)
+#     y_num = y.values
+#     return accuracy_score(y_num,y_knn)
 from flask import Flask
 app = Flask(__name__)
 
