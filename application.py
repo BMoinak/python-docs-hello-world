@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 def knnmodel():
     return 20
 from flask import Flask
