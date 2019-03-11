@@ -43,6 +43,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    x = knnmodtrain()
+    x = knnmodel()
     y="Accuracy of the model is: " + str(x)
     return y
