@@ -6,5 +6,5 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     x = knnmodel()
-    y="<h1>Accuracy of the model is</h1>"+x
+    y="<h1>Accuracy of the model is</h1>"
     return y
