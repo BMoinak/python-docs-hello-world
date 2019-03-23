@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd
-import pickle
-
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import normalize
@@ -10,6 +8,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
+import pickle
 def knnmodel():
     full_data=pd.read_csv("train.csv")
     full_data=full_data.sample(frac=1)
