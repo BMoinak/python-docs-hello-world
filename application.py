@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
-#import pickle
+import pickle
+
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import normalize
@@ -44,5 +45,5 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     x = knnmodel()
-    y="Accuracy of the model is: " + str(x)
+    y="Accuracy of the model is: " + str(x) + pickle.__doc__
     return y
