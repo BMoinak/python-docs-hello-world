@@ -28,7 +28,10 @@ def knnmodel():
     knn_precison_score=precision_score(test_labels,knn_predicted_test_labels)
     knn_recall_score=recall_score(test_labels,knn_predicted_test_labels)
     knn_f1_score=f1_score(test_labels,knn_predicted_test_labels)
-    return knn_accuracy_score
+    #return knn_accuracy_score
+    file = "knn.pkl"
+    with open(file, "wb") as f:
+        pickle.dump(knn, f, protocol=2)
 def knnmodtrain():
     with open("knn.pkl", "rb") as f:
         knn = pickle.load(f)
@@ -43,6 +46,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    x = knnmodtrain()
-    y="Accuracy of the model is: " + str(x)
+    x = knnmodel()
+    y="Accuracy of the model is: "
     return y
