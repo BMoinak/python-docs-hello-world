@@ -8,38 +8,46 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
+from keras.preprocessing import sequence
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation, Lambda
+from keras.layers import Embedding
+from keras.layers import Convolution1D,MaxPooling1D, Flatten
+from keras import backend as K
+from keras.layers import LSTM, GRU, SimpleRNN
+from keras.callbacks import CSVLogger
+from sklearn.ensemble import VotingClassifier
+from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau, CSVLogger
+import h5py
 import pickle
-def knnmodel():
-    full_data=pd.read_csv("train.csv")
-    full_data=full_data.sample(frac=1)
-    full_labels = full_data['fraud']
-    full_features = full_data.drop('fraud', axis = 1)
-    full_features_array = full_features.values
-    full_labels_array = full_labels.values
-    train_features,test_features,train_labels,test_labels=train_test_split(
-    full_features_array,full_labels_array,train_size=0.80,test_size=0.20)
-    train_features=normalize(train_features)
-    test_features=normalize(test_features)
-    knn=KNeighborsClassifier(n_neighbors=4,algorithm="kd_tree",n_jobs=-1)
-    knn.fit(train_features,train_labels.ravel())
-    knn_predicted_test_labels=knn.predict(test_features)
-    tn,fp,fn,tp=confusion_matrix(test_labels,knn_predicted_test_labels).ravel()
-    knn_accuracy_score=accuracy_score(test_labels,knn_predicted_test_labels)
-    knn_precison_score=precision_score(test_labels,knn_predicted_test_labels)
-    knn_recall_score=recall_score(test_labels,knn_predicted_test_labels)
-    knn_f1_score=f1_score(test_labels,knn_predicted_test_labels)
-    #return knn_accuracy_score
-    file = "knn.pkl"
-    with open(file, "wb") as f:
-        pickle.dump(knn, f, protocol=2)
+
+data = pd.read_csv("test.csv")
+X = data.drop("fraud", axis = 1)
+y = data["fraud"]
+y_num = y.values
+def cnnmodel():
+    test_labels = np.array(y)
+    test_features = np.reshape(X.values, (X.values.shape[0],X.values.shape[1],1))
+    lstm_output_size = 70
+    cnn = Sequential()
+    cnn.add(Convolution1D(64, 3, activation="relu", input_shape= (8, 1)))
+    cnn.add(Convolution1D(64, 3, activation="relu"))
+    cnn.add(MaxPooling1D(pool_size=2))
+    cnn.add(Convolution1D(128, 3, activation="relu", padding = "same"))
+    cnn.add(Convolution1D(128, 3, activation="relu", padding = "same"))
+    cnn.add(MaxPooling1D(pool_size=2))
+    cnn.add(LSTM(lstm_output_size))
+    cnn.add(Dropout(0.1))
+    cnn.add(Dense(2, activation="softmax"))
+    cnn.load_weights("cnn_model.hdf5")
+    cnn.compile(loss="sparse_categorical_crossentropy", optimizer="SGD", metrics=['accuracy'])
+    print("Created model and loaded weights from file")
+    y_cnn = cnn.predict_classes(test_features)
+    return accuracy_score(y_num, y_cnn)
 def knnmodtrain():
     with open("knn.pkl", "rb") as f:
         knn = pickle.load(f)
-    data = pd.read_csv("test.csv")
-    X = data.drop("fraud", axis = 1)
-    y = data["fraud"]
     y_knn = knn.predict(X)
-    y_num = y.values
     return accuracy_score(y_num,y_knn)
 from flask import Flask
 app = Flask(__name__)
@@ -48,5 +56,6 @@ app = Flask(__name__)
 def hello():
     #knnmodel()
     x = knnmodtrain()
-    y="Accuracy of the model is: " + str(x)
+    z = cnnmodel()
+    y="Accuracy of the KNN model is: " + str(x) + "<br>\n Accuracy of the CNN Model is :" + str(z)
     return y
