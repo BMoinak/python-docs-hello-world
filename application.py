@@ -62,7 +62,7 @@ def hello():
     return y
 
 @app.route("/")
-def hello():
+def hel():
     #knnmodel()
     x = knnmodtrain()
     z = cnnmodel()
