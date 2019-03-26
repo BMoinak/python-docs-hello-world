@@ -56,7 +56,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def hel():
     #knnmodel()
-    x = knnmodtrain()
+    #x = knnmodtrain()
     z = cnnmodel()
     y="Accuracy of the KNN model is: " + str(x) + "<br>\n Accuracy of the CNN Model is :" + str(z)
     return y
