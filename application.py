@@ -49,7 +49,7 @@ def knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn ):
         knn = pickle.load(f)
     arr_testing=pd.DataFrame({'customer':[a_knn],'age':[b_knn],'gender':[c_knn],'zipcodeOri':[d_knn],'merchant':[e_knn],'zipMerchant':[f_knn],'category':[g_knn],'amount':[h_knn]},columns=['customer','age','gender','zipcodeOri','merchant','zipMerchant','category','amount'])
     y_knn = knn.predict(arr_testing)
-    return y_knn
+    return y_knn[0]
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
