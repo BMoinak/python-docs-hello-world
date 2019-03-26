@@ -49,7 +49,7 @@ def knnmodtrain():
         knn = pickle.load(f)
     y_knn = knn.predict(X)
     return accuracy_score(y_num,y_knn)
-from flask import Flask
+from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
 @app.route("/",methods = ['POST','GET'])
