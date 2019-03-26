@@ -58,7 +58,7 @@ def hel():
     #knnmodel()
     #x = knnmodtrain()
     z = cnnmodel()
-    y="Accuracy of the KNN model is: " + str(x) + "<br>\n Accuracy of the CNN Model is :" + str(z)
+    y="Accuracy of the KNN model is: " + "<br>\n Accuracy of the CNN Model is :" + str(z)
     return y
 
 @app.route('/poststuff/', methods=['GET', 'POST'])
