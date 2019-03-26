@@ -44,11 +44,12 @@ def cnnmodel():
     print("Created model and loaded weights from file")
     y_cnn = cnn.predict_classes(test_features)
     return accuracy_score(y_num, y_cnn)
-def knnmodtrain():
+def knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn ):
     with open("knn.pkl", "rb") as f:
         knn = pickle.load(f)
-    y_knn = knn.predict(X)
-    return accuracy_score(y_num,y_knn)
+    arr_testing=pd.DataFrame({'customer':[a_knn],'age':[b_knn],'gender':[c_knn],'zipcodeOri':[d_knn],'merchant':[e_knn],'zipMerchant':[f_knn],'category':[g_knn],'amount':[h_knn]},columns=['customer','age','gender','zipcodeOri','merchant','zipMerchant','category','amount'])
+    y_knn = knn.predict(arr_testing)
+    return y_knn
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
@@ -63,9 +64,16 @@ def hel():
 @app.route('/poststuff/', methods=['GET', 'POST'])
 def hello():
     #knnmodel()
-    y=""
     if request.method == 'POST':
-        user = request.form['nm']
-        y=user+"<br>"
-    return y
+        a_knn = request.form['customer']
+        b_knn = request.form['age']
+        c_knn = request.form['gender']
+        d_knn = request.form['zipcodeOri']
+        e_knn = request.form['merchant']
+        f_knn = request.form['zipMerchant']
+        g_knn = request.form['category']
+        h_knn = request.form['amount']
+        y=knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn )
+        return y
+    return -1
 
