@@ -52,15 +52,6 @@ def knnmodtrain():
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
-# @app.route("/poststuff",methods = ['POST','GET'])
-# def hello():
-#     #knnmodel()
-#     y=""
-#     if request.method == 'POST':
-#         user = request.form['nm']
-#         y=user+"<br>"
-#     return y
-
 @app.route("/")
 def hel():
     #knnmodel()
@@ -68,3 +59,13 @@ def hel():
     z = cnnmodel()
     y="Accuracy of the KNN model is: " + str(x) + "<br>\n Accuracy of the CNN Model is :" + str(z)
     return y
+
+@app.route('/poststuff/',methods = ['POST','GET'])
+def hello():
+    #knnmodel()
+    y=""
+    if request.method == 'POST':
+        user = request.form['nm']
+        y=user+"<br>"
+    return y
+
