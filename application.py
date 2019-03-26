@@ -60,7 +60,7 @@ def hel():
     y="Accuracy of the KNN model is: " + str(x) + "<br>\n Accuracy of the CNN Model is :" + str(z)
     return y
 
-@app.route('/poststuff/',methods = ['POST','GET'])
+@app.route('/poststuff/',methods = ['POST'])
 def hello():
     #knnmodel()
     y=""
