@@ -53,7 +53,7 @@ def knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn ):
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def hel():
     #knnmodel()
     #x = knnmodtrain()
