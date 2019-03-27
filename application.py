@@ -53,7 +53,7 @@ def knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn ):
 from flask import Flask, redirect, url_for, request
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def hel():
     #knnmodel()
     #x = knnmodtrain()
@@ -61,19 +61,18 @@ def hel():
     y="Accuracy of the KNN model is: " + "<br>\n Accuracy of the CNN Model is :" + str(z)
     return y
 
-#@app.route('/poststuff/', methods=['GET', 'POST'])
-#def hello():
+@app.route("/poststuff/", methods=['GET', 'POST'])
+def hello():
     #knnmodel()
-#    if request.method == 'POST':
-#        a_knn = request.form['customer']
-#        b_knn = request.form['age']
-#        c_knn = request.form['gender']
-#       d_knn = request.form['zipcodeOri']
-#        e_knn = request.form['merchant']
-#        f_knn = request.form['zipMerchant']
-#        g_knn = request.form['category']
-#        h_knn = request.form['amount']
-#        y=knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn )
-#        return y
-#    return -1
+    if request.method == 'POST':
+        a_knn = request.form['customer']
+        b_knn = request.form['age']
+        c_knn = request.form['gender']
+        d_knn = request.form['zipcodeOri']
+        e_knn = request.form['merchant']
+        f_knn = request.form['zipMerchant']         g_knn = request.form['category']
+        h_knn = request.form['amount']
+        y=knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn )
+        return y
+    return -1
 
