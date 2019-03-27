@@ -70,7 +70,8 @@ def hello():
         c_knn = request.form['gender']
         d_knn = request.form['zipcodeOri']
         e_knn = request.form['merchant']
-        f_knn = request.form['zipMerchant']         g_knn = request.form['category']
+        f_knn = request.form['zipMerchant']         
+        g_knn = request.form['category']
         h_knn = request.form['amount']
         y=knnmodtrain( a_knn, b_knn, c_knn, d_knn, e_knn, f_knn, g_knn, h_knn )
         return y
